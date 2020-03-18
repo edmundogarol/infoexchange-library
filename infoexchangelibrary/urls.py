@@ -23,6 +23,7 @@ router.register(r'books', ListBooksView)
 router.register(r'authors', ListAuthorsView)
 
 urlpatterns = [
+    path('', include('frontend.urls')),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

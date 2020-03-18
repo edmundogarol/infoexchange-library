@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'infoexchangelibrary'
+    'infoexchangelibrary',
+    'frontend', # enable the frontend app
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,9 @@ TEMPLATES = [
         },
     },
 ]
+
+# os.path.join(BASE_DIR, 'frontend')
+# os.path.join(BASE_DIR, 'infoexchangelibrary', "templates")
 
 WSGI_APPLICATION = 'infoexchangelibrary.wsgi.application'
 
