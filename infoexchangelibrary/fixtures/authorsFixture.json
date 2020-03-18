@@ -1,0 +1,18 @@
+[
+  {
+    "model": "infoexchangelibrary.author",
+    "pk": 1,
+    "fields": {
+      "first_name": "AMAA",
+      "last_name": "Australia"
+    }
+  },
+  {
+    "model": "infoexchangelibrary.author",
+    "pk": 2,
+    "fields": {
+      "first_name": "Edmundo",
+      "last_name": "Garol"
+    }
+  }
+]

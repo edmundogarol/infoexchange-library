@@ -1,0 +1,20 @@
+[
+  {
+    "model": "infoexchangelibrary.book",
+    "pk": 1,
+    "fields": {
+      "name": "Gday Punch Manga Magazine Issue #1",
+      "isbn": "439023993",
+      "author": "1"
+    }
+  },
+  {
+    "model": "infoexchangelibrary.book",
+    "pk": 2,
+    "fields": {
+      "name": "Gday Punch Manga Magazine Issue #2",
+      "isbn": "942304923",
+      "author": "1"
+    }
+  }
+]
