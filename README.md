@@ -1,2 +1,2 @@
 # infoexchange-library
-infoexchange Full-stack Developer Challange
+infoexchange Full-stack Developer Challenge
