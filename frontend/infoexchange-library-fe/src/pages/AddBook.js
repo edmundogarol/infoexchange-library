@@ -11,7 +11,7 @@ import {
   updatePendingBook,
   updateSelectedBookId
 } from "../actions/book";
-import { selectActiveBook } from "../selectors/app";
+import { selectAuthors } from "../selectors/app";
 
 class AddBook extends React.Component {
   constructor(props) {
@@ -45,6 +45,9 @@ class AddBook extends React.Component {
   }
 
   render() {
+    const { authors } = this.props;
+
+    console.log("authors", authors);
     return (
       <div className="App">
         <header className="App-header">
@@ -78,8 +81,11 @@ class AddBook extends React.Component {
                   value={this.state.author}
                   onChange={e => this.setState({ author: e.target.value })}
                 >
-                  <option value={1}>AMAA</option>
-                  <option value={2}>Edmundo</option>
+                  {authors.map(author => (
+                    <option
+                      value={author.pk}
+                    >{`${author.first_name} ${author.last_name}`}</option>
+                  ))}
                 </select>
               </div>
               <div className="isbn">
@@ -105,7 +111,7 @@ class AddBook extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  activeBook: selectActiveBook
+  authors: selectAuthors
 });
 
 const mapDispatchToProps = {
