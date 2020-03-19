@@ -132,10 +132,11 @@ button {
   flex-direction: column;
 }
 
-.name input {
+.name input,
+.isbn input {
   height: 3em;
   padding-left: 1em;
-  font-size: 0.74em;  
+  font-size: 0.74em;
 }
 
 .name img {

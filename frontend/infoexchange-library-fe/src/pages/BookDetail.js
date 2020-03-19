@@ -109,7 +109,25 @@ class BookDetail extends React.Component {
                 </div>
                 <div className="isbn">
                   <p>ISBN</p>
-                  <h3>{book.isbn}</h3>
+                  {this.state.editISBN ? (
+                    <input
+                      placeholder={book.isbn}
+                      value={this.state.isbn}
+                      onChange={e => this.setState({ isbn: e.target.value })}
+                      onKeyDown={this.handleKeyDown}
+                    />
+                  ) : (
+                    <div className="edit-group">
+                      <h3>
+                        {this.state.isbn === "" ? book.isbn : this.state.isbn}
+                      </h3>
+                      <img
+                        onClick={() => this.setState({ editISBN: true })}
+                        className="edit"
+                        src={getResource("edit.png")}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -130,8 +148,8 @@ const mapDispatchToProps = {
   doUpdateBook: updateBook,
   doRequestBooks: requestBooks,
   doRequestAuthors: requestAuthors,
-  doUpdatePendingBook: updatePendingBook, 
-  doUpdateSelectedID: updateSelectedBookId,
+  doUpdatePendingBook: updatePendingBook,
+  doUpdateSelectedID: updateSelectedBookId
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetail);

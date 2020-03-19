@@ -53,7 +53,6 @@ export function* getAuthors() {
  */
 export function* updateBookCall() {
   const pendingBook = yield select(selectPendingBook);
-  console.log('pendingBook', pendingBook);
 
   const response = yield call(api, `book/${pendingBook.pk}/`, {
     method: "PATCH",
@@ -64,7 +63,6 @@ export function* updateBookCall() {
 
   if (response && response.ok) {
     const data = yield response.json();
-    console.log("data", data);
     yield put(updateSingleBook(data));
   } else {
     console.log("Update book error", JSON.stringify(response));
