@@ -6,7 +6,8 @@ import { Router, Route } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 
 import "./App.css";
-import Home from "./pages/Home";
+import Home from "./pages/Home";AddBook
+import AddBook from "./pages/AddBook";
 import BookDetail from "./pages/BookDetail";
 import librarySaga from "./sagas/app";
 import appReducer from "./reducers/app";
@@ -25,6 +26,7 @@ function App() {
     <Provider store={store}>
       <Router history={history}>
           <Route exact path="/" component={Home} />
+          <Route exact path="/add/" component={AddBook} />
           <Route path="/book/:id/" component={BookDetail} />
       </Router>
     </Provider>

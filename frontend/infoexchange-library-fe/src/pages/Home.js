@@ -41,6 +41,16 @@ class Home extends React.Component {
                 </div>
               </Link>
             ))}
+            <Link to={`/add/`}>
+              <div className="book">
+                <img
+                  src={getResource("add.png")}
+                  className="book-icon"
+                  alt={"Create book"}
+                />
+                <p>Create Book</p>
+              </div>
+            </Link>
           </div>
         </header>
       </div>

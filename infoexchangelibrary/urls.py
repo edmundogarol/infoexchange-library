@@ -26,6 +26,7 @@ router.register(r'api/book', BookView, basename='book')
 
 urlpatterns = [
     path('', include('frontend.urls')),
+    path('add/', include('frontend.urls')),
     path('book/<id>/', include('frontend.urls')),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

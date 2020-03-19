@@ -54,12 +54,16 @@ export function* getAuthors() {
 export function* updateBookCall() {
   const pendingBook = yield select(selectPendingBook);
 
-  const response = yield call(api, `book/${pendingBook.pk}/`, {
-    method: "PATCH",
-    body: {
-      ...pendingBook
-    },
-  });
+  const response = yield call(
+    api,
+    pendingBook.pk ? `book/${pendingBook.pk}/` : "books/",
+    {
+      method: pendingBook.pk ? "PATCH" : "POST",
+      body: {
+        ...pendingBook
+      }
+    }
+  );
 
   if (response && response.ok) {
     const data = yield response.json();

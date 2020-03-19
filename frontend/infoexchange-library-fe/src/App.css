@@ -67,6 +67,10 @@ button {
 .shelf {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  width: 90%;
+  justify-content: center;
+  margin-top: 0.5em;
 }
 
 .shelf a {
@@ -133,7 +137,8 @@ button {
 }
 
 .name input,
-.isbn input {
+.isbn input,
+.author select {
   height: 3em;
   padding-left: 1em;
   font-size: 0.74em;
