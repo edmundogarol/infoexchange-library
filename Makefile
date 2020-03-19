@@ -11,8 +11,11 @@ build:
 
 migrate:
 	python manage.py migrate
+
+loaddata:
+	python manage.py loaddata authorsFixture && python manage.py loaddata booksFixture
 	
 run:
 	python manage.py runserver
 
-library: gui	dev	build	migrate	run
+library: gui	dev	build	migrate	loaddata	run
