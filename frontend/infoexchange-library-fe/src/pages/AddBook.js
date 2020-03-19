@@ -91,6 +91,7 @@ class AddBook extends React.Component {
                 >
                   {authors.map(author => (
                     <option
+                      key={author.pk}
                       value={author.pk}
                     >{`${author.first_name} ${author.last_name}`}</option>
                   ))}
@@ -125,7 +126,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   doUpdateBook: updateBook,
   doRequestAuthors: requestAuthors,
-  doUpdatePendingBook: updatePendingBook,
+  doUpdatePendingBook: updatePendingBook
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);
