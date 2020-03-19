@@ -19,33 +19,28 @@ class AddBook extends React.Component {
     this.state = {
       name: "",
       isbn: "",
-      author: ""
+      author: "",
+      editName: false,
+      editISBN: false,
+      editAuthor: false
     };
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  componentDidMount() {
-    const { id } = this.props.match.params;
-  }
-
-  bookUpdateSubmit(initialBook) {
-    const newBookDetails = {
-      ...initialBook,
-      name: this.state.name !== "" ? this.state.name : initialBook.name,
-      isbn: this.state.isbn !== "" ? this.state.isbn : initialBook.isbn,
-      author: this.state.author !== "" ? this.state.author : initialBook.author
-    };
-    this.props.doUpdatePendingBook(newBookDetails);
+  bookUpdateSubmit() {
+    this.props.doUpdatePendingBook({
+      name: this.state.name,
+      isbn: this.state.isbn,
+      author: this.state.author
+    });
     this.props.doUpdateBook();
   }
 
   handleKeyDown(e) {
     if (e.key === "Enter") {
-      const { book } = this.props.activeBook;
-
-      this.bookUpdateSubmit(book);
-      this.setState({ editName: false, editISBN: false, editAuthor: false });
+      this.bookUpdateSubmit();
+      this.setState({ editName: true, editISBN: true, editAuthor: true });
     }
   }
 
@@ -64,29 +59,42 @@ class AddBook extends React.Component {
           <div className="book-details">
             <div className="name">
               <img src={getResource("book-icon.png")} />
-              <input
-                placeholder="Enter Book Title"
-                value={this.state.name}
-                onChange={e => this.setState({ name: e.target.value })}
-                onKeyDown={this.handleKeyDown}
-              />
+              {this.state.editName ? (
+                <p>{this.state.name}</p>
+              ) : (
+                <input
+                  placeholder="Enter Book Title"
+                  value={this.state.name}
+                  onChange={e => this.setState({ name: e.target.value })}
+                  onKeyDown={this.handleKeyDown}
+                />
+              )}
             </div>
             <div className="author-isbn">
               <div className="author">
-                <p>Author</p>{this.state.author}
-                <select value={this.state.author} onChange={e => this.setState({ author: e.target.value })}>
-                <option value={1}>AMAA</option>
-                <option value={2}>Edmundo</option>
+                <p>Author</p>
+                {this.state.author}
+                <select
+                  value={this.state.author}
+                  onChange={e => this.setState({ author: e.target.value })}
+                >
+                  <option value={1}>AMAA</option>
+                  <option value={2}>Edmundo</option>
                 </select>
               </div>
               <div className="isbn">
                 <p>ISBN</p>
-                <input
-                  placeholder="Enter new ISBN"
-                  value={this.state.isbn}
-                  onChange={e => this.setState({ isbn: e.target.value })}
-                  onKeyDown={this.handleKeyDown}
-                />
+
+                {this.state.editISBN ? (
+                  <h3>{this.state.isbn}</h3>
+                ) : (
+                  <input
+                    placeholder="Enter new ISBN"
+                    value={this.state.isbn}
+                    onChange={e => this.setState({ isbn: e.target.value })}
+                    onKeyDown={this.handleKeyDown}
+                  />
+                )}
               </div>
             </div>
           </div>
