@@ -23,12 +23,30 @@ class AuthorView(UpdateModelMixin, viewsets.ViewSet):  # handles PUTs and PATCHe
         serializer = AuthorSerializer(author)
         return Response(serializer.data)
 
+    def partial_update(self, request, *args, **kwargs):
+        queryset = Book.objects.all()
+        book = queryset.get(pk=kwargs.get('pk'))
+        serializer_class = BookSerializer
+        serializer = BookSerializer(book, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
 class BookView(UpdateModelMixin, viewsets.ViewSet):  # handles PUTs and PATCHes
 
     def retrieve(self,request,pk=None):
         queryset = Book.objects.all()
         book = get_object_or_404(queryset, pk=pk)
         serializer = BookSerializer(book)
+        return Response(serializer.data)
+
+    def partial_update(self, request, *args, **kwargs):
+        queryset = Book.objects.all()
+        book = queryset.get(pk=kwargs.get('pk'))
+        serializer_class = BookSerializer
+        serializer = BookSerializer(book, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data)
 
 class ListAuthorsView(viewsets.ModelViewSet):
