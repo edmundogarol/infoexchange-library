@@ -6,10 +6,9 @@ const INITIAL_STATE = {
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
+  console.log('action', action);
   switch (action.type) {
     case BOOKS_UPDATED:
-      console.log('action', action);
-
       return {
         ...state,
         books: action.payload.books

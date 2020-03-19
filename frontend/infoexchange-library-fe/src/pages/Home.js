@@ -7,30 +7,39 @@ import { requestBooks } from "../actions/book";
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { getBooks: false };
+  }
+
+  componentDidMount() {
+    this.props.doRequestBooks();
+    console.log("books: ", this.props.books);
   }
 
   componentDidUpdate() {
-    if (this.state.getBooks) {
-      this.props.doRequestBooks();
-      this.setState({ getBooks: false });
-    }
-
-    console.log('books: ', this.props.books);
+    console.log("books: ", this.props.books);
   }
 
   render() {
-    console.log(this.props);
+    const { books } = this.props;
 
     return (
       <div className="App">
         <header className="App-header">
           <img src={getResource("book.png")} className="App-logo" alt="logo" />
           <p>Welcome to the InfoExchange Library</p>
-          {this.state.getBooks && <span>Getting books</span>}
-          <button onClick={() => this.setState({ getBooks: true })}>
-            Fetch books
-          </button>
+          <div className="shelf">
+            {books.map(book => (
+              <a href={`/book/${book.pk}`} key={book.isbn}>
+                <div className="book">
+                  <img
+                    src={getResource("book-icon.png")}
+                    className="book-icon"
+                    alt={book.name}
+                  />
+                  <p>{book.name}</p>
+                </div>
+              </a>
+            ))}
+          </div>
         </header>
       </div>
     );

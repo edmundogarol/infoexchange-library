@@ -52,3 +52,31 @@ button {
   border: 1px solid #fad15a;
   color: #333333;
 }
+
+.shelf {
+  display: flex;
+  flex-direction: row;
+}
+
+.shelf a {
+  text-decoration: none;
+  color: #333333;
+}
+
+.book {
+  font-size: 0.6em;
+  width: 10em;
+  text-decoration: none;
+}
+
+.book img {
+  height: 5em;
+}
+
+.shelf a:nth-child(even) {
+  filter: hue-rotate(0deg);
+}
+.shelf a:nth-child(odd) {
+  filter: hue-rotate(45deg);
+}
+
