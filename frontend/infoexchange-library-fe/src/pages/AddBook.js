@@ -48,6 +48,10 @@ class AddBook extends React.Component {
   handleKeyDown(e) {
     if (e.key === "Enter") {
       this.bookUpdateSubmit();
+      /** 
+       * This is to add a bit of feedback to the user that a book
+       * has been created
+       */
       this.setState({ editName: true, editISBN: true, editAuthor: true });
     }
   }

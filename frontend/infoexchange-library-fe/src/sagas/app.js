@@ -50,6 +50,9 @@ export function* getAuthors() {
 
 /**
  * Update book instance
+ * 
+ * This saga chooses between creating a book and updating an existing
+ * book depending on the pendingbook object
  */
 export function* updateBookCall() {
   const pendingBook = yield select(selectPendingBook);

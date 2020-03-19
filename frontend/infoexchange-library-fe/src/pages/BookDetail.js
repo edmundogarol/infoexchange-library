@@ -51,6 +51,10 @@ class BookDetail extends React.Component {
       isbn: this.state.isbn !== "" ? this.state.isbn : initialBook.isbn,
       author: this.state.author !== "" ? this.state.author : initialBook.author
     };
+
+    /** 
+     * Update the pending book lined up and call saga that makes the update call
+     */
     this.props.doUpdatePendingBook(newBookDetails);
     this.props.doUpdateBook();
   }
