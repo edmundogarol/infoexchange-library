@@ -1,6 +1,8 @@
 # infoexchange-library
 infoexchange Full-stack Developer Challenge
 
+![infoexchange_library_home](https://fnblyg.bn.files.1drv.com/y4mbYrw4qii-SU6XycHL--lXETrZ4UPLO0etvR70g5Mzr7nAIO_ShQibzEzZ6ULdQH65Ul-1iR9ZgrsSnHea-6L_U6OM--9TeMW2WHITu4cRm2Mx8qjh2-CrR_u_iUWMIt6OOAxd3_nOA8EdqvNp4mYKeQJveFpNFNaVv4jFOKTCX8Ozu5DiUWIlixZQ4QW1_e4pw3mnN-ijdVHRhIYuFT3JA?width=542&height=690&cropmode=none)
+
 Deployment (Mac)
 
 On root directory:
