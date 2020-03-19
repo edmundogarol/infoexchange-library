@@ -1,5 +1,11 @@
 import { call } from "redux-saga/effects";
 
+const STATIC_URL = "http://127.0.0.1:8000/static/"
+
+export function getResource(url) {
+  return `${STATIC_URL}${url}`;
+}
+
 /**
  *  Custom fetch for myTransport application
  */ 

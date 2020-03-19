@@ -17,8 +17,7 @@ export function* getBooks() {
   });
 
   if (response && response.ok) {
-    console.log("Response", response);
-    yield put(updateBooks(response.result));
+    response.json().then(body => put(updateBooks(body)));
   } 
   else {
     console.log("Get Books error", JSON.stringify(response));
