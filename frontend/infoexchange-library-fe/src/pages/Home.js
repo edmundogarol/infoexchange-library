@@ -21,10 +21,18 @@ class Home extends React.Component {
   render() {
     const { books } = this.props;
 
+    console.log("HOME");
+
     return (
       <div className="App">
         <header className="App-header">
-          <img src={getResource("book.png")} className="App-logo" alt="logo" />
+          <a href="/">
+            <img
+              src={getResource("book.png")}
+              className="App-logo"
+              alt="logo"
+            />
+          </a>{" "}
           <p>Welcome to the InfoExchange Library</p>
           <div className="shelf">
             {books.map(book => (
