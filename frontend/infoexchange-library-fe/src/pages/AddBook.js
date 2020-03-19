@@ -28,6 +28,14 @@ class AddBook extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
+  componentDidMount() {
+    const { authors } = this.props;
+
+    if (!authors.length) {
+      this.props.doRequestAuthors();
+    }
+  }
+
   bookUpdateSubmit() {
     this.props.doUpdatePendingBook({
       name: this.state.name,
@@ -116,10 +124,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   doUpdateBook: updateBook,
-  doRequestBooks: requestBooks,
   doRequestAuthors: requestAuthors,
   doUpdatePendingBook: updatePendingBook,
-  doUpdateSelectedID: updateSelectedBookId
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);
