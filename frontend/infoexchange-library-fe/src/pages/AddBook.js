@@ -55,7 +55,6 @@ class AddBook extends React.Component {
   render() {
     const { authors } = this.props;
 
-    console.log("authors", authors);
     return (
       <div className="App">
         <header className="App-header">
@@ -84,7 +83,6 @@ class AddBook extends React.Component {
             <div className="author-isbn">
               <div className="author">
                 <p>Author</p>
-                {this.state.author}
                 <select
                   value={this.state.author}
                   onChange={e => this.setState({ author: e.target.value })}
