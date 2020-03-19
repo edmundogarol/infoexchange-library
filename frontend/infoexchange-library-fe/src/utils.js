@@ -10,7 +10,7 @@ export function getResource(url) {
  *  Custom fetch for myTransport application
  */ 
 export async function customFetch(url, params = {}) {
-  const apiEndpoint = "http://127.0.0.1:8000/";
+  const apiEndpoint = "http://127.0.0.1:8000/api/";
   const composedURL = new URL(url, apiEndpoint);
   
   const {

@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 from rest_framework import routers
-from .infoexchangelibrary.views import ListBooksView, ListAuthorsView
+from .infoexchangelibrary.views import ListBooksView, ListAuthorsView, AuthorView, BookView
 
 router = routers.DefaultRouter()
-router.register(r'books', ListBooksView)
-router.register(r'authors', ListAuthorsView)
+router.register(r'api/books', ListBooksView)
+router.register(r'api/authors', ListAuthorsView)
+router.register(r'api/author', AuthorView, basename='author')
+router.register(r'api/book', BookView, basename='book')
 
 urlpatterns = [
     path('', include('frontend.urls')),
