@@ -42,7 +42,7 @@ class BookDetail extends React.Component {
             />
           </Link>
 
-          {book ? (
+          {book && author ? (
             <div className="book-details">
               <div className="name">
                 <img src={getResource("book-icon.png")} />
@@ -60,7 +60,7 @@ class BookDetail extends React.Component {
               </div>
             </div>
           ) : (
-            "Loading books..."
+            "Loading books & authors..."
           )}
         </header>
       </div>
