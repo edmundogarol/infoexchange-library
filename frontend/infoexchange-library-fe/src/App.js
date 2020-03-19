@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
 import createSagaMiddleware from "redux-saga";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 
 import "./App.css";
@@ -25,7 +25,7 @@ function App() {
     <Provider store={store}>
       <Router history={history}>
           <Route exact path="/" component={Home} />
-          <Route path="/book/:id" component={BookDetail} />
+          <Route path="/book/:id/" component={BookDetail} />
       </Router>
     </Provider>
   );

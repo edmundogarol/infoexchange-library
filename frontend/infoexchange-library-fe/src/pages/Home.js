@@ -1,42 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { Link } from "react-router-dom";
 
 import { getResource } from "../utils";
 import { requestBooks } from "../actions/book";
+import { requestAuthors } from "../actions/author";
+import { selectBooks, selectAuthors } from "../selectors/app";
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.doRequestBooks();
-    console.log("books: ", this.props.books);
-  }
-
-  componentDidUpdate() {
-    console.log("books: ", this.props.books);
+    this.props.doRequestAuthors();
   }
 
   render() {
-    const { books } = this.props;
+    const { books, authors } = this.props;
 
-    console.log("HOME");
+    console.log("books, authors", books, authors);
 
     return (
       <div className="App">
         <header className="App-header">
-          <a href="/">
+          <Link to="/">
             <img
               src={getResource("book.png")}
               className="App-logo"
               alt="logo"
             />
-          </a>{" "}
+          </Link>
           <p>Welcome to the InfoExchange Library</p>
           <div className="shelf">
             {books.map(book => (
-              <a href={`/book/${book.pk}`} key={book.isbn}>
+              <Link to={`/book/${book.pk}/`} key={book.isbn}>
                 <div className="book">
                   <img
                     src={getResource("book-icon.png")}
@@ -45,7 +41,7 @@ class Home extends React.Component {
                   />
                   <p>{book.name}</p>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </header>
@@ -54,15 +50,14 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { app } = state;
-  return {
-    books: app.books
-  };
-};
+const mapStateToProps = createStructuredSelector({
+  books: selectBooks,
+  authors: selectAuthors
+});
 
 const mapDispatchToProps = {
-  doRequestBooks: requestBooks
+  doRequestBooks: requestBooks,
+  doRequestAuthors: requestAuthors
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
