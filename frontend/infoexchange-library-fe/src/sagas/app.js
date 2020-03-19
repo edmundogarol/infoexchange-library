@@ -1,5 +1,18 @@
-import { call, all, takeLatest, put } from "redux-saga/effects";
-import { BOOKS_FETCH_REQUESTED, updateBooks } from "../actions/book";
+import {
+  call,
+  all,
+  select,
+  takeLatest,
+  takeEvery,
+  put
+} from "redux-saga/effects";
+import {
+  BOOKS_FETCH_REQUESTED,
+  BOOK_UPDATE_REQUESTED,
+  updateSingleBook,
+  updateBooks
+} from "../actions/book";
+import { selectActiveBook, selectPendingBook } from "../selectors/app";
 import { AUTHORS_FETCH_REQUESTED, updateAuthors } from "../actions/author";
 import { api } from "../utils";
 
@@ -35,9 +48,33 @@ export function* getAuthors() {
   }
 }
 
+/**
+ * Update book instance
+ */
+export function* updateBookCall() {
+  const pendingBook = yield select(selectPendingBook);
+  console.log('pendingBook', pendingBook);
+
+  const response = yield call(api, `book/${pendingBook.pk}/`, {
+    method: "PATCH",
+    body: {
+      ...pendingBook
+    },
+  });
+
+  if (response && response.ok) {
+    const data = yield response.json();
+    console.log("data", data);
+    yield put(updateSingleBook(data));
+  } else {
+    console.log("Update book error", JSON.stringify(response));
+  }
+}
+
 export default function* librarySaga() {
   yield all([
     takeLatest(BOOKS_FETCH_REQUESTED, getBooks),
     takeLatest(AUTHORS_FETCH_REQUESTED, getAuthors),
+    takeEvery(BOOK_UPDATE_REQUESTED, updateBookCall)
   ]);
 }

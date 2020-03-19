@@ -4,32 +4,68 @@ import { createStructuredSelector } from "reselect";
 import { Link } from "react-router-dom";
 
 import { getResource } from "../utils";
-import { requestBooks } from "../actions/book";
 import { requestAuthors } from "../actions/author";
-import { selectBooks, selectAuthors } from "../selectors/app";
+import {
+  requestBooks,
+  updateBook,
+  updatePendingBook,
+  updateSelectedBookId
+} from "../actions/book";
+import { selectActiveBook } from "../selectors/app";
 
 class BookDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      isbn: "",
+      author: "",
+      editName: false,
+      editISBN: false,
+      editAuthor: false
+    };
+
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+
   componentDidMount() {
-    if (!this.props.books.length) {
+    const { id } = this.props.match.params;
+    const { book, author } = this.props.activeBook;
+
+    this.props.doUpdateSelectedID(id);
+
+    if (!book) {
       this.props.doRequestBooks();
+    } else {
+      this.props.doUpdatePendingBook(book);
     }
-    if (!this.props.authors.length) {
+    if (!author) {
       this.props.doRequestAuthors();
     }
   }
 
-  render() {
-    const { books, authors } = this.props;
-    const { id } = this.props.match.params;
+  bookUpdateSubmit(initialBook) {
+    const newBookDetails = {
+      ...initialBook,
+      name: this.state.name !== "" ? this.state.name : initialBook.name,
+      isbn: this.state.isbn !== "" ? this.state.isbn : initialBook.isbn,
+      author: this.state.author !== "" ? this.state.author : initialBook.author
+    };
+    this.props.doUpdatePendingBook(newBookDetails);
+    this.props.doUpdateBook();
+  }
 
-    console.log("books", books);
-    const book = books.find(book => parseInt(book.pk, 10) === parseInt(id, 10));
-    console.log("book", book);
-    console.log("authors", authors);
-    const author = authors.find(
-      author => parseInt(author.pk, 10) === parseInt(book.author, 10)
-    );
-    console.log("author", author);
+  handleKeyDown(e) {
+    if (e.key === "Enter") {
+      const { book } = this.props.activeBook;
+
+      this.bookUpdateSubmit(book);
+      this.setState({ editName: false, editISBN: false, editAuthor: false });
+    }
+  }
+
+  render() {
+    const { book, author } = this.props.activeBook;
 
     return (
       <div className="App">
@@ -46,7 +82,25 @@ class BookDetail extends React.Component {
             <div className="book-details">
               <div className="name">
                 <img src={getResource("book-icon.png")} />
-                <p>{book.name}</p>
+                {this.state.editName ? (
+                  <input
+                    placeholder={book.name}
+                    value={this.state.name}
+                    onChange={e => this.setState({ name: e.target.value })}
+                    onKeyDown={this.handleKeyDown}
+                  />
+                ) : (
+                  <div className="edit-group">
+                    <p>
+                      {this.state.name === "" ? book.name : this.state.name}
+                    </p>
+                    <img
+                      onClick={() => this.setState({ editName: true })}
+                      className="edit"
+                      src={getResource("edit.png")}
+                    />
+                  </div>
+                )}
               </div>
               <div className="author-isbn">
                 <div className="author">
@@ -69,13 +123,15 @@ class BookDetail extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  books: selectBooks,
-  authors: selectAuthors
+  activeBook: selectActiveBook
 });
 
 const mapDispatchToProps = {
+  doUpdateBook: updateBook,
   doRequestBooks: requestBooks,
-  doRequestAuthors: requestAuthors
+  doRequestAuthors: requestAuthors,
+  doUpdatePendingBook: updatePendingBook, 
+  doUpdateSelectedID: updateSelectedBookId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookDetail);

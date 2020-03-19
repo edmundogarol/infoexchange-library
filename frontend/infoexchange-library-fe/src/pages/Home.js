@@ -17,8 +17,6 @@ class Home extends React.Component {
   render() {
     const { books, authors } = this.props;
 
-    console.log("books, authors", books, authors);
-
     return (
       <div className="App">
         <header className="App-header">

@@ -84,6 +84,20 @@ button {
   height: 5em;
 }
 
+.edit-group .edit {
+  height: 1em;
+  margin-left: 1em;
+}
+.edit:hover {
+  cursor: pointer;
+}
+
+.edit-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .shelf a:nth-child(even) {
   filter: hue-rotate(0deg);
 }
@@ -108,8 +122,20 @@ button {
   flex-direction: column;
 }
 
-.author p, .isbn p {
+.author p,
+.isbn p {
   margin-bottom: unset;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+}
+
+.name input {
+  height: 3em;
+  padding-left: 1em;
+  font-size: 0.74em;  
 }
 
 .name img {

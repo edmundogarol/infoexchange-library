@@ -27,6 +27,7 @@ export async function customFetch(url, params = {}) {
 
   finalParams.headers = {
     ...finalParams.headers,
+    "Content-Type": contentType,
     mode: "no cors",
     "Retry-After": 3600,
   };
