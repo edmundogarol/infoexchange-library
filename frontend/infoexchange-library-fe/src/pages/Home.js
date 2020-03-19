@@ -30,7 +30,7 @@ class Home extends React.Component {
           <p>Welcome to the InfoExchange Library</p>
           <div className="shelf">
             {books.map(book => (
-              <Link to={`/book/${book.pk}/`} key={book.isbn}>
+              <Link to={`/book/${book.pk}/`} key={book.pk}>
                 <div className="book">
                   <img
                     src={getResource("book-icon.png")}
