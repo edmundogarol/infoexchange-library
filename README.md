@@ -23,6 +23,10 @@ Backend API (Django REST Framework)
 
   `GET /api/author/{{id}}/` - Returns a detail view of the specified author id
 
+  `POST /api/authors/` - Creates a new author with the specified details - Expects a JSON body
+
+  `POST /api/books/` - Creates a new book with the specified details - Expects a JSON body
+
   `PATCH /author/{{id}}/` - Updates an existing author - Expects a JSON body
   
   `PATCH /book/{{id}}/` - Updates an existing book - Expects a JSON body
